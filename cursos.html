@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso: Desenvolvimento Web - NivelUp!</title>
-    <script>
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.className = savedTheme + '-mode';
-    </script>
+    <title>Plataforma de Curso - NivelUp!</title>
     <link rel="stylesheet" href="cursos-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,99 +11,44 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
-
-    <div class="course-container">
-        <main class="video-content">
-            <header class="course-header">
-                <a href="index.html" class="back-link"><i class="ph ph-arrow-left"></i> Voltar para o início</a>
-                <button id="theme-toggle-btn" class="theme-toggle">
-                    <i class="ph ph-sun"></i>
-                    <i class="ph ph-moon"></i>
-                </button>
-            </header>
-            
-            <div class="video-player">
-                <video id="video-player-element" controls width="100%">
-                    <source src="videos/aula1.mp4" type="video/mp4">
-                    Seu navegador não suporta a tag de vídeo.
-                </video>
-            </div>
-
-            <div class="lesson-details">
-                <h1 id="lesson-title">01. Boas-vindas e preparação do ambiente</h1>
-                <p id="lesson-description">Vamos começar nossa jornada! Nesta seção, você entenderá a estrutura do curso e aprenderá a configurar todas as ferramentas essenciais para um desenvolvimento ágil.</p>
-                
-                <button id="mark-complete-btn" class="complete-button">
-                    <i class="ph ph-check-circle"></i> Marcar como concluída
-                </button>
-
-                <div class="materials-section">
-                    <h3><i class="ph ph-paperclip"></i> Materiais e Links</h3>
-                    <ul id="lesson-materials">
-                        <li><a href="#" download><i class="ph ph-file-pdf"></i> Guia de Setup.pdf</a></li>
-                        <li><a href="https://code.visualstudio.com/" target="_blank"><i class="ph ph-link"></i> Download do VS Code</a></li>
-                    </ul>
-                </div>
-
-                <div class="lesson-navigation">
-                    <button id="prev-lesson-btn" class="nav-button" disabled><i class="ph ph-arrow-left"></i> Aula Anterior</button>
-                    <button id="next-lesson-btn" class="nav-button">Próxima Aula <i class="ph ph-arrow-right"></i></button>
-                </div>
-            </div>
-        </main>
-
-        <aside class="course-sidebar">
+    <div class="platform-container">
+        <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>Conteúdo do Curso</h2>
+                <a href="index.html" class="logo">NivelUp<span>!</span></a>
+            </div>
+            <div class="progress-section">
+                <span>Progresso do Curso</span>
                 <div class="progress-bar-container">
                     <div id="progress-bar" class="progress-bar-fill"></div>
                 </div>
                 <span id="progress-text">0% concluído</span>
             </div>
             <nav class="modules-nav">
-                <div class="module-item" id="module-1">
-                    <h3 class="module-title">Módulo 1: Fundamentos</h3>
-                    <ul class="lessons-list">
-                        <li><a href="#" class="lesson-link active" data-video-src="videos/aula1.mp4" data-title="01. Boas-vindas e preparação do ambiente" data-description="Vamos começar nossa jornada! Nesta seção, você entenderá a estrutura do curso e aprenderá a configurar todas as ferramentas essenciais para um desenvolvimento ágil."><i class="ph-fill ph-check-circle completion-icon"></i><span class="lesson-number">01</span><span class="lesson-name">Boas-vindas e preparação</span><span class="lesson-duration">15 min</span></a></li>
-                        <li><a href="#" class="lesson-link" data-video-src="videos/aula2.mp4" data-title="02. Estrutura básica do HTML 5" data-description="HTML é o esqueleto de toda página web. Você aprenderá as tags mais importantes, como criar textos, listas, links e imagens, e como organizar seu conteúdo de forma semântica e profissional."><i class="ph-fill ph-check-circle completion-icon"></i><span class="lesson-number">02</span><span class="lesson-name">Estrutura básica do HTML</span><span class="lesson-duration">35 min</span></a></li>
-                    </ul>
-                    <button class="activity-btn" data-module="1"><i class="ph ph-pencil-simple"></i> Fazer Atividade do Módulo 1</button>
-                </div>
-                <div class="module-item locked" id="module-2">
-                    <h3 class="module-title">Módulo 2: Estilização e Layout</h3>
-                    <ul class="lessons-list">
-                         <li><a href="#" class="lesson-link" data-video-src="videos/aula3.mp4" data-title="03. Estilizando com CSS3" data-description="É hora de dar vida ao seu HTML! Aprenda a usar o CSS para definir cores, fontes, espaçamentos e bordas, transformando uma página simples em um design visualmente atraente."><i class="ph-fill ph-check-circle completion-icon"></i><span class="lesson-number">03</span><span class="lesson-name">Estilizando com CSS3</span><span class="lesson-duration">50 min</span></a></li>
-                        <li><a href="#" class="lesson-link" data-video-src="videos/aula4.mp4" data-title="04. Layout responsável" data-description="Nesta seção, você dominará o Flexbox, a ferramenta mais poderosa do CSS para criar layouts que se adaptam a qualquer tamanho de tela, do celular ao desktop."><i class="ph-fill ph-check-circle completion-icon"></i><span class="lesson-number">04</span><span class="lesson-name">Layout responsável</span><span class="lesson-duration">45 min</span></a></li>
-                    </ul>
-                    <button class="activity-btn" data-module="2" disabled><i class="ph ph-pencil-simple"></i> Fazer Atividade do Módulo 2</button>
-                </div>
-                <div class="module-item locked" id="module-3">
-                     <h3 class="module-title">Módulo 3: Ferramentas</h3>
-                    <ul class="lessons-list">
-                        <li><a href="#" class="lesson-link" data-video-src="videos/aula5.mp4" data-title="05. Versionando com Github" data-description="Aprenda a ferramenta essencial para todo desenvolvedor. Você vai descobrir como salvar o histórico do seu código com Git e como hospedar seus projetos online no GitHub."><i class="ph-fill ph-check-circle completion-icon"></i><span class="lesson-number">05</span><span class="lesson-name">Versionando com Github</span><span class="lesson-duration">35 min</span></a></li>
-                    </ul>
-                    <button class="activity-btn" data-module="3" disabled><i class="ph ph-star"></i> Fazer Prova Final</button>
-                </div>
-            </nav>
+                </nav>
         </aside>
-    </div>
 
-    <div id="quiz-modal" class="modal-overlay" style="display: none;">
-        <div class="modal-content">
-            <div id="quiz-view">
-                <h2 id="quiz-title">Atividade do Módulo</h2>
-                <div id="quiz-questions"></div>
-                <button id="submit-quiz-btn" class="nav-button">Verificar Respostas</button>
+        <main class="main-content">
+            <header class="main-header">
+                <button class="open-sidebar-btn"><i class="ph ph-list"></i></button>
+                <h2 id="current-lesson-header-title">Carregando...</h2>
+            </header>
+            
+            <div class="video-player">
+                <iframe id="video-player-iframe" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div id="result-view" style="display: none;">
-                <h2 id="result-title">Resultado</h2>
-                <p id="result-score"></p>
-                <p id="result-message"></p>
-                <button id="result-action-btn" class="nav-button">Continuar</button>
-            </div>
-        </div>
-    </div>
 
+            <div class="lesson-details">
+                <div class="lesson-actions">
+                    <button id="mark-complete-btn" class="action-button complete-button"><i class="ph ph-check-circle"></i> Marcar como concluída</button>
+                    <a id="materials-link" href="#" target="_blank" class="action-button secondary"><i class="ph ph-paperclip"></i> Materiais (Classroom)</a>
+                </div>
+                <div class="lesson-navigation">
+                    <button id="prev-lesson-btn" class="nav-button" disabled><i class="ph ph-arrow-left"></i> Anterior</button>
+                    <button id="next-lesson-btn" class="nav-button">Próxima Aula <i class="ph ph-arrow-right"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
     <script src="cursos-script.js"></script>
 </body>
 </html>
