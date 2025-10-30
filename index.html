@@ -15,13 +15,29 @@
     <header>
         <div class="container">
             <a href="#" class="logo">NivelUp<span>!</span></a>
-            <nav>
+            
+            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de navegação">
+                <i class="ph ph-list"></i>
+            </button>
+            
+            <nav id="main-nav-desktop">
                 <a href="#modulos">O Curso</a>
                 <a href="#desenvolvedores">Desenvolvedores</a>
                 <a href="cursos.html" class="cta-button-nav">Acesse Curso</a>
             </nav>
         </div>
     </header>
+
+    <div id="offcanvas-menu" class="offcanvas-menu">
+        <button id="close-menu" class="close-menu" aria-label="Fechar menu de navegação">
+            <i class="ph ph-x"></i>
+        </button>
+        <nav class="offcanvas-nav">
+            <a href="#modulos">O Curso</a>
+            <a href="#desenvolvedores">Desenvolvedores</a>
+            <a href="cursos.html" class="cta-button-nav-mobile">Acesse Curso</a>
+        </nav>
+    </div>
 
     <main>
         <section id="hero">
@@ -182,4 +198,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

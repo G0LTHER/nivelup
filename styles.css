@@ -10,21 +10,105 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-white); }
+body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-white); overflow-x: hidden; } /* Adicionado overflow-x: hidden para evitar barra horizontal no mobile */
 .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 .section-padding { padding: 6rem 0; }
 .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
 
-/* HEADER */
+/* HEADER (Desktop) */
 header { width: 100%; padding: 1rem 0; position: fixed; top: 0; z-index: 10; background-color: rgba(18, 24, 33, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
 header .container { display: flex; justify-content: space-between; align-items: center; }
 .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-white); }
 .logo span { color: var(--primary-blue); }
-nav { display: flex; align-items: center; gap: 1.5rem; }
-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; transition: color 0.3s ease; }
-nav a:hover { color: var(--text-white); }
+#main-nav-desktop { display: flex; align-items: center; gap: 1.5rem; }
+#main-nav-desktop a { text-decoration: none; color: var(--text-muted); font-weight: 600; transition: color 0.3s ease; }
+#main-nav-desktop a:hover { color: var(--text-white); }
 .cta-button-nav { padding: 0.5rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 50px; color: var(--primary-blue); }
 .cta-button-nav:hover { background-color: var(--primary-blue); color: var(--bg-dark); }
+
+/* MENU OFF-CANVAS (HAMBÚRGUER LATERAL) */
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 2rem;
+    cursor: pointer;
+    display: none; /* Escondido por padrão (desktop) */
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: color 0.3s ease;
+}
+.menu-toggle:hover {
+    color: var(--primary-blue);
+}
+
+.offcanvas-menu {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Escondido à direita */
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-light-dark); 
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    z-index: 30;
+    transition: right 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+}
+
+.offcanvas-menu.open {
+    right: 0; /* Visível */
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 2rem;
+    cursor: pointer;
+    align-self: flex-end; /* Alinha o botão de fechar à direita */
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+.close-menu:hover {
+    color: var(--primary-blue);
+}
+
+.offcanvas-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.offcanvas-nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.offcanvas-nav a:hover {
+    background-color: var(--border-color);
+    color: var(--primary-blue);
+}
+
+.cta-button-nav-mobile {
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--primary-blue);
+    border-radius: 8px;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+.cta-button-nav-mobile:hover {
+    background-color: var(--primary-blue);
+    color: var(--bg-dark);
+}
+
 
 /* HERO SECTION (INICIAL) */
 #hero {
@@ -186,5 +270,18 @@ footer { padding: 2rem 0; text-align: center; color: var(--text-muted); border-t
     .modules-grid { grid-template-columns: 1fr; }
     .developers-container { flex-direction: column; text-align: center; }
     .developers-bio .section-title { text-align: center; }
-    nav { display: none; }
+    
+    /* Regras de Mobile para o Menu Off-Canvas */
+    #main-nav-desktop {
+        display: none; /* Esconder a navegação desktop */
+    }
+    .menu-toggle {
+        display: block; /* Mostrar o botão de hambúrguer */
+    }
+
+    /* Ajuste de largura do menu lateral para mobile */
+    .offcanvas-menu {
+        width: 280px;
+        right: -280px;
+    }
 }
