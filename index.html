@@ -7,24 +7,31 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonte Inter, conforme solicitado -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body>
+<body class="dark-mode"> <!-- Define o modo escuro como padrão -->
 
     <header>
         <div class="container">
             <a href="#" class="logo">NivelUp<span>!</span></a>
             
-            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de navegação">
-                <i class="ph ph-list"></i>
-            </button>
+            <div class="header-controls">
+                <!-- Botão de Alternância de Tema -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema claro e escuro">
+                    <i class="ph ph-sun" id="theme-icon"></i> <!-- Ícone inicial: Sol (modo claro) -->
+                </button>
             
-            <nav id="main-nav-desktop">
-                <a href="#modulos">O Curso</a>
-                <a href="#desenvolvedores">Desenvolvedores</a>
-                <a href="https://classroom.google.com/c/ODIyNDgzMTc5MDU4?cjc=vgesfufx" class="cta-button-nav">Acesse o Curso</a>
-            </nav>
+                <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu de navegação">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <nav id="main-nav-desktop">
+                    <!-- Apenas o botão "Acesse Curso" no cabeçalho principal -->
+                    <a href="#inscricao-final" class="cta-button-nav">Acesse Curso</a>
+                </nav>
+            </div>
         </div>
     </header>
 
@@ -33,9 +40,12 @@
             <i class="ph ph-x"></i>
         </button>
         <nav class="offcanvas-nav">
-            <a href="#modulos">O Curso</a>
-            <a href="#desenvolvedores">Desenvolvedores</a>
-            <a href="https://classroom.google.com/c/ODIyNDgzMTc5MDU4?cjc=vgesfufx" class="cta-button-nav-mobile">Acesse Curso</a>
+            <!-- Links para navegação interna -->
+            <a href="#hero">Início</a>
+            <a href="#modulos">Sobre o Curso</a>
+            <a href="#team-section-integrated">Desenvolvedores</a>
+            <a href="#faq-section">Dúvidas</a>
+            <a href="#inscricao-final" class="cta-button-nav-mobile">Acesse Curso</a>
         </nav>
     </div>
 
@@ -45,7 +55,7 @@
                 <div class="hero-content">
                     <h1>Desenvolvimento Web: Para Iniciantes</h1>
                     <p class="subtitle">Aprenda HTML, CSS e GitHub e construa projetos reais para iniciar sua carreira na área de tecnologia.</p>
-                    <a href="https://classroom.google.com/c/ODIyNDgzMTc5MDU4?cjc=vgesfufx" class="cta-button-hero">Começar Agora!</a>
+                    <a href="#inscricao-final" class="cta-button-hero">Começar Agora!</a>
                 </div>
             </div>
         </section>
@@ -80,22 +90,23 @@
             <div class="container">
                 <h2 class="section-title">O que você vai aprender?</h2>
                 <div class="modules-grid">
-                    <div class="module-card">
+                    <!-- Cards de Módulo com SCROLL SUAVE para #conteudo -->
+                    <div class="module-card" id="card-html" data-target="#conteudo">
                         <span class="module-number">01</span>
                         <h3>HTML5: Básico</h3>
                         <p>Estruture o corpo de páginas web, a base fundamental para qualquer site profissional.</p>
                     </div>
-                    <div class="module-card">
+                    <div class="module-card" id="card-css" data-target="#conteudo">
                         <span class="module-number">02</span>
                         <h3>CSS3: Básico</h3>
                         <p>Estilize as suas páginas web utilizando o CSS, criando designs responsivos e visualmente incríveis com o seu gosto.</p>
                     </div>
-                    <div class="module-card">
+                    <div class="module-card" id="card-github" data-target="#conteudo">
                         <span class="module-number">03</span>
                         <h3>GitHub: Deixe Seu Projeto Ativo</h3>
                         <p>Com o GitHub, você assume o controle total dos seus projetos, gerencia cada detalhe com maestria, colabora de forma integrada com sua equipe e ainda publica seu próprio WebSite online com praticidade.</p>
                     </div>
-                    <div class="module-card project-card">
+                    <div class="module-card project-card" id="card-projeto" data-target="#conteudo">
                         <span class="module-number"><i class="ph-bold ph-rocket-launch"></i></span>
                         <h3>Projeto Final</h3>
                         <p>Aplique todo o conhecimento que você aprendeu construindo o seu próprio portfólio deixando-o totalmente online do zero para apresentar os seus trabalhos.</p>
@@ -104,24 +115,115 @@
             </div>
         </section>
 
-        <section id="desenvolvedores" class="section-padding">
-            <div class="container developers-container">
-                <img src="img/Desenvolvedor.png" alt="Logo Unifenas" class="university-logo">
-                <div class="developers-bio">
-                    <h2 class="section-title">Feito por acadêmicos da UNIFENAS</h2>
-                    <p>Este curso foi desenvolvido com dedicação pelos acadêmicos da UNIFENAS, em Alfenas, com o propósito de compartilhar conhecimento de forma aberta, gratuita e acessível a toda a comunidade.</p>
-                    <a href="desenvolvedores.html" class="cta-button-secondary">Conheça os Desenvolvedores do Projeto</a>
+        <!-- SEÇÃO DE DESENVOLVEDORES INTEGRADA (Com expansão e fundo curvo) -->
+        <section id="team-section-integrated" class="section-padding team-section-integrated">
+            <div class="container">
+                <div class="team-header">
+                    <span class="team-subtitle">Sobre o Projeto</span>
+                    <h2>Feito por acadêmicos da UNIFENAS</h2>
+                    <p class="team-description">
+                       Este curso foi desenvolvido com dedicação pelos acadêmicos da UNIFENAS, em Alfenas, com o propósito de compartilhar
+                       conhecimento de forma aberta, gratuita e acessível a toda a comunidade.
+                    </p>
+                    
+                    <!-- Botão para expandir/esconder os integrantes -->
+                    <button id="team-toggle-button" class="team-toggle-button">
+                        <span id="toggle-text">Conheça os Desenvolvedores</span>
+                        <i id="team-toggle-icon" class="ph ph-caret-down"></i>
+                    </button>
+                </div>
+
+                <!-- Lista de Desenvolvedores (Conteúdo a ser controlado pelo JS) -->
+                <div id="team-grid-container" class="team-grid-container">
+                    <div class="team-grid">
+                        
+                        <!-- Cards sem foto e apenas com links sociais (Github/Instagram) -->
+                        <div class="member-card-integrated">
+                            <h3>Ruan Henrique</h3>
+                            <p class="member-role-integrated">Designer e Desenvolvedor Front-End</p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card-integrated">
+                            <h3>Andrey Lucas</h3>
+                            <p class="member-role-integrated">Roteirista & Conteúdo</p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-card-integrated">
+                            <h3>Matheus Ferreira</h3>
+                            <p class="member-role-integrated">Desenvolvedor Front-End, Infraestrutura, Testes & Redator </p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-card-integrated">
+                            <h3>Breno Silveira</h3>
+                            <p class="member-role-integrated">Editor de vídeo</p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-card-integrated">
+                            <h3>Nikolas Almeida</h3>
+                            <p class="member-role-integrated">Criador de Conteúdo</p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card-integrated">
+                            <h3>Gabriel Dos Santos</h3>
+                            <p class="member-role-integrated">Criador de Conteúdo</p>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="GitHub" class="social-icon"><i class="ph-bold ph-github-logo"></i></a>
+                                <a href="#" target="_blank" title="Instagram" class="social-icon"><i class="ph-bold ph-instagram-logo"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Seção de Conteúdo do Curso (curriculum-section) - Tem efeito de COBERTURA -->
         <section id="conteudo" class="section-padding curriculum-section">
             <div class="container">
                 <h2 class="section-title">Conteúdo do Curso</h2>
                 <div class="accordion-container">
+                    
+                    <!-- Tópico 01: Primeiros passos -->
                     <div class="accordion-item">
                         <button class="accordion-header">
-                            <span>01. Boas-vindas e preparação do ambiente</span>
+                            <span>01. Primeiros passos em programação</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>
+                                Módulo 01 — 10 aulas • 45 minutos<br><br>
+                                Nesse módulo você terá uma introdução ao curso e sobre o mercado de programação. Vamos responder as principais dúvidas de quem está chegando nesse universo:
+                            </p>
+                            <ul>
+                                <li>O que é ser dev, programar e quais as áreas de atuação?</li>
+                                <li>Como funciona a internet, programas e arquivos?</li>
+                                <li>O que é Front-end e Back-end?</li>
+                                <li>Qual o salário de um programador?</li>
+                                <li>Quais habilidades eu preciso desenvolver?</li>
+                                <li>Quais tecnologias eu preciso aprender?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>02. Boas-vindas e preparação do ambiente</span>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="accordion-content">
@@ -130,7 +232,7 @@
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header">
-                            <span>02. Estrutura básica do HTML 5</span>
+                            <span>03. Estrutura básica do HTML 5</span>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="accordion-content">
@@ -139,7 +241,7 @@
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header">
-                            <span>03. Estilizando com CSS3</span>
+                            <span>04. Estilizando com CSS3</span>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="accordion-content">
@@ -148,7 +250,7 @@
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header">
-                            <span>04. Página Responsiva</span>
+                            <span>05. Layout responsável</span>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="accordion-content">
@@ -157,7 +259,7 @@
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-header">
-                            <span>05. Versionando com Github</span>
+                            <span>06. Versionando com Github</span>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="accordion-content">
@@ -168,7 +270,8 @@
             </div>
         </section>
 
-        <section id="inscricao-final">
+        <!-- SEÇÃO FINAL DE INSCRIÇÃO (Ordem correta: antes da FAQ) -->
+        <section id="inscricao-final" class="final-cta-full">
             <div class="final-cta-container">
                 <div class="final-cta-content">
                     <h2>Pronto para começar sua jornada?</h2>
@@ -177,12 +280,67 @@
                         <li><i class="ph-fill ph-check-circle"></i> Estude no seu tempo: aulas gravadas e exercícios prontos para você!</li>
                         <li><i class="ph-fill ph-check-circle"></i> Saia com resultados: crie seu primeiro projeto e enriqueça seu portfólio</li>
                     </ul>
-                    <a href="#" class="cta-button-final">
+                    <a href="https://classroom.google.com/c/ODIyNDgzMTc5MDU4?cjc=vgesfufx" class="cta-button-final">
                         <i class="ph-fill ph-user-circle-plus"></i> COMEÇAR GRATUITAMENTE
                     </a>
                 </div>
-                <div class="final-cta-image">
-                    <img src="img/Curso.png" alt="Interface do Curso NivelUp!">
+            </div>
+        </section>
+        
+        <!-- NOVA SEÇÃO FAQ / DÚVIDAS -->
+        <section id="faq-section" class="section-padding">
+            <div class="container faq-container">
+                <div class="faq-header">
+                    <span class="faq-subtitle">DÚVIDAS SOBRE O CURSO</span>
+                    <h2 class="section-title-left">Perguntas e respostas frequentes sobre o curso</h2>
+                </div>
+                
+                <div class="accordion-container faq-accordion-container">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>01. O curso é realmente gratuito?</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Sim! O NivelUp! foi criado como um projeto de extensão da UNIFENAS para ser totalmente gratuito e acessível. Nosso objetivo é democratizar o conhecimento em desenvolvimento web para iniciantes.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>02. Preciso ter conhecimentos prévios para participar?</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Não é necessário! O curso é voltado para iniciantes (nível zero) e começa com os fundamentos de HTML, CSS e lógica de programação básica, preparando você do zero até a publicação do seu primeiro projeto.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>03. Precisa de algum equipamento especial?</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Você precisará apenas de um computador (desktop ou notebook) com acesso à internet e um editor de código simples, como o VS Code (que ensinamos a instalar), e o Google Chrome. Não é necessário hardware avançado.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>04. Qual a duração total do curso?</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>O conteúdo central tem aproximadamente 3 horas de vídeo, mas você pode estudar no seu próprio ritmo. Recomendamos dedicar algumas horas por semana para completar o curso e o projeto prático em 2 a 4 semanas.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>05. O NivelUp! possui certificado?</span>
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <p>Atualmente, o curso não oferece um certificado formal da UNIFENAS. No entanto, o conhecimento e o projeto prático que você desenvolve são os maiores ativos para seu portfólio profissional.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -197,9 +355,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
-
-
-
-

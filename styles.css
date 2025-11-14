@@ -1,142 +1,189 @@
-/* GLOBAIS E VARIÁVEIS */
+/* GLOBAIS E VARIÁVEIS - MODO ESCURO (Padrão) */
 :root {
+    /* Cores Escuras */
     --bg-dark: #121821;
     --bg-light-dark: #1E293B;
-    --primary-blue: #0EA5E9;
     --text-white: #F8FAFC;
     --text-muted: #94A3B8;
     --border-color: #334155;
+    --card-bg: var(--bg-light-dark);
+    --bg-header: rgba(18, 24, 33, 0.9);
+    --bg-accordion-active: var(--bg-dark);
+    --final-cta-bg: #0C0D17; /* Cor de fundo escura e sólida para o CTA final (único bloco que não muda) */
+    
+    /* Variáveis para o novo fundo curvo (INTENSIFICADAS) */
+    --bg-radial-color-dark-large: rgba(14, 165, 233, 0.4); /* Opacidade AUMENTADA: Azul mais forte */
+    --bg-radial-color-dark-small: rgba(14, 165, 233, 0.2);  /* Opacidade AUMENTADA: Azul menor */
+
+    /* Cores Claras (Fallbacks) */
+    --bg-light: #FFFFFF;
+    --bg-light-medium: #F3F4F6;
+    --text-dark: #1F2937;
+    --text-muted-light: #6B7280;
+    --border-color-light: #E5E7EB;
+    
+    /* Variáveis para o novo fundo curvo no modo claro (AUMENTADO O DESTAQUE) */
+    --bg-radial-color-light-large: rgba(14, 165, 233, 0.2); /* Aumentado para 20% de opacidade */
+    --bg-radial-color-light-small: rgba(14, 165, 233, 0.1); /* Aumentado para 10% de opacidade */
+
+    /* Cores Primárias */
+    --primary-blue: #0EA5E9;
     --bg-dark-blue-gradient: linear-gradient(90deg, #100C31 0%, #1A0E4B 100%);
 }
+
+/* GLOBAIS E VARIÁVEIS - MODO CLARO */
+body.light-mode {
+    /* Cor de fundo do body: FIXADA em branco (var(--bg-light)) */
+    --bg-light-dark: var(--bg-light-medium);
+    --text-white: var(--text-dark);
+    --text-muted: var(--text-muted-light);
+    --border-color: var(--border-color-light);
+    --card-bg: var(--bg-light);
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --bg-accordion-active: var(--bg-light-medium);
+    /* Mantém a cor de fundo do CTA final escura, conforme solicitado */
+    --final-cta-bg: #0C0D17; 
+    --bg-radial-color-dark-large: var(--bg-radial-color-light-large); 
+    --bg-radial-color-dark-small: var(--bg-radial-color-light-small);
+
+    /* NOVO: Força o background do body para BRANCO no modo claro */
+    background-color: var(--bg-light); 
+    
+    /* VARIÁVEIS DE INVERSÃO PARA A SEÇÃO DESENVOLVEDORES (TEMA AZUL NO CLARO) */
+    /* NOVO: Azul mais ESCURO para o fundo */
+    --team-bg-light: #07649C; 
+    --team-text-light: var(--bg-light); /* Branco (Destaque forte) */
+    /* NOVO: Opacidade total para o branco sutil */
+    --team-muted-light: rgba(255, 255, 255, 1); 
+    --team-border-light: var(--bg-light); 
+}
+
+/* ESTILOS BASE */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-white); overflow-x: hidden; } /* Adicionado overflow-x: hidden para evitar barra horizontal no mobile */
+/* Aplica as variáveis do tema ao body */
+body { 
+    /* Aplicando a fonte Inter */
+    font-family: 'Inter', sans-serif; 
+    /* A cor de fundo padrão é definida por --bg-dark (escuro) */
+    background-color: var(--bg-dark); 
+    color: var(--text-white); 
+    overflow-x: hidden; 
+    transition: background-color 0.4s, color 0.4s; /* Transição suave para tema */
+} 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 .section-padding { padding: 6rem 0; }
-.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--text-white); }
+.section-title-left { text-align: left; } /* Novo estilo para o título da FAQ */
 
-/* HEADER (Desktop) */
-header { width: 100%; padding: 1rem 0; position: fixed; top: 0; z-index: 10; background-color: rgba(18, 24, 33, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
+/* HEADER */
+header { 
+    width: 100%; padding: 1rem 0; position: fixed; top: 0; z-index: 10; 
+    background-color: var(--bg-header); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s, border-color 0.4s;
+}
 header .container { display: flex; justify-content: space-between; align-items: center; }
+.header-controls { display: flex; align-items: center; gap: 1.5rem; }
+
 .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-white); }
 .logo span { color: var(--primary-blue); }
+
+/* Botão de Alternância de Tema */
+.theme-toggle {
+    background: none; border: none; color: var(--text-white); font-size: 1.8rem;
+    cursor: pointer; transition: color 0.3s ease;
+}
+.theme-toggle:hover { color: var(--primary-blue); }
+
 #main-nav-desktop { display: flex; align-items: center; gap: 1.5rem; }
-#main-nav-desktop a { text-decoration: none; color: var(--text-muted); font-weight: 600; transition: color 0.3s ease; }
-#main-nav-desktop a:hover { color: var(--text-white); }
-.cta-button-nav { padding: 0.5rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 50px; color: var(--primary-blue); }
+
+.cta-button-nav { 
+    padding: 0.5rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 50px; 
+    color: var(--primary-blue); font-weight: 600; 
+    transition: all 0.3s ease; 
+}
 .cta-button-nav:hover { background-color: var(--primary-blue); color: var(--bg-dark); }
+body.light-mode .cta-button-nav:hover { color: var(--bg-light); } 
+
 
 /* MENU OFF-CANVAS (HAMBÚRGUER LATERAL) */
 .menu-toggle {
-    background: none;
-    border: none;
-    color: var(--text-white);
-    font-size: 2rem;
-    cursor: pointer;
-    display: none; /* Escondido por padrão (desktop) */
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: color 0.3s ease;
+    background: none; border: none; color: var(--text-white); font-size: 2rem;
+    cursor: pointer; display: none; padding: 0.5rem; border-radius: 4px; transition: color 0.3s ease;
 }
-.menu-toggle:hover {
-    color: var(--primary-blue);
-}
+.menu-toggle:hover { color: var(--primary-blue); }
 
 .offcanvas-menu {
-    position: fixed;
-    top: 0;
-    right: -300px; /* Escondido à direita */
-    width: 300px;
-    height: 100%;
-    background-color: var(--bg-light-dark); 
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-    z-index: 30;
-    transition: right 0.4s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 1rem;
+    position: fixed; top: 0; right: -300px; width: 300px; height: 100%;
+    background-color: var(--card-bg); 
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3); z-index: 30;
+    transition: right 0.4s ease-in-out, background-color 0.4s;
+    display: flex; flex-direction: column; padding: 2rem 1rem;
 }
-
-.offcanvas-menu.open {
-    right: 0; /* Visível */
-}
-
+.offcanvas-menu.open { right: 0; }
 .close-menu {
-    background: none;
-    border: none;
-    color: var(--text-white);
-    font-size: 2rem;
-    cursor: pointer;
-    align-self: flex-end; /* Alinha o botão de fechar à direita */
-    margin-bottom: 2rem;
-    transition: color 0.3s ease;
+    background: none; border: none; color: var(--text-white); font-size: 2rem;
+    cursor: pointer; align-self: flex-end; margin-bottom: 2rem; transition: color 0.3s ease;
 }
-.close-menu:hover {
-    color: var(--primary-blue);
-}
-
-.offcanvas-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
+.close-menu:hover { color: var(--primary-blue); }
+.offcanvas-nav { display: flex; flex-direction: column; gap: 1.5rem; }
 .offcanvas-nav a {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none; color: var(--text-muted); font-size: 1.1rem; font-weight: 600;
+    padding: 0.8rem 1rem; border-radius: 8px; transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-.offcanvas-nav a:hover {
-    background-color: var(--border-color);
-    color: var(--primary-blue);
+.offcanvas-nav a:hover { 
+    background-color: var(--border-color); 
+    color: var(--primary-blue); 
 }
-
 .cta-button-nav-mobile {
-    padding: 0.8rem 1rem;
-    border: 2px solid var(--primary-blue);
-    border-radius: 8px;
-    color: var(--primary-blue);
-    text-align: center;
-    margin-top: 0.5rem;
+    padding: 0.8rem 1rem; border: 2px solid var(--primary-blue); border-radius: 8px;
+    color: var(--primary-blue); text-align: center; margin-top: 0.5rem;
 }
-.cta-button-nav-mobile:hover {
-    background-color: var(--primary-blue);
-    color: var(--bg-dark);
-}
-
+.cta-button-nav-mobile:hover { background-color: var(--primary-blue); color: var(--bg-dark); }
+body.light-mode .cta-button-nav-mobile:hover { color: var(--bg-light); }
 
 /* HERO SECTION (INICIAL) */
 #hero {
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
+    height: 80vh; display: flex; align-items: center; text-align: center;
+    /* Fundo original, escuro com imagem de fundo sutil */
     background: linear-gradient(rgba(18, 24, 33, 0.9), var(--bg-dark)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1169') no-repeat center center/cover;
+    transition: background-color 0.4s; 
 }
-.hero-content { max-width: 700px; margin: 0 auto; }
+/* CORREÇÃO: No modo claro, deve ficar CLARO. Usamos um gradiente branco e forçamos o texto escuro. */
+body.light-mode #hero {
+    /* Gradiente branco/claro sobre a imagem para dar destaque */
+    background: linear-gradient(rgba(255, 255, 255, 0.9), var(--bg-light)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1169') no-repeat center center/cover;
+    background-size: cover;
+}
+
+/* Garante que o texto do Hero fique escuro no modo claro, e a cor primária para o título */
+body.light-mode .hero-content h1 { 
+    color: var(--text-dark); /* Título escuro */
+}
+body.light-mode .hero-content .subtitle { 
+    color: var(--text-muted-light); /* Subtítulo cinza */
+}
+/* Reverte o texto para branco no modo escuro */
+.hero-content h1 { color: var(--text-white); }
+.hero-content .subtitle { color: var(--text-muted); }
+
+
 .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; }
-.hero-content .subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; }
+.hero-content .subtitle { font-size: 1.1rem; margin-bottom: 2rem; }
 .cta-button-hero {
-    display: inline-block;
-    padding: 1rem 3rem;
-    background-color: var(--primary-blue);
-    color: var(--text-white);
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    display: inline-block; padding: 1rem 3rem; background-color: var(--primary-blue);
+    /* Alterado para ser sempre branco */
+    color: #FFFFFF; 
+    font-size: 1.1rem; font-weight: 700; text-decoration: none;
+    border-radius: 8px; transition: transform 0.3s ease;
 }
 .cta-button-hero:hover { transform: scale(1.05); }
 
 /* INFO BAR */
 #info-bar { background-color: var(--primary-blue); padding: 1.5rem 0; }
-#info-bar .container { display: flex; justify-content: space-around; align-items: center; }
+#info-bar .container { display: flex; justify-content: space-around; align-items: center; color: white; }
 .info-item { display: flex; align-items: center; gap: 1rem; }
 .info-item i { font-size: 2.5rem; }
 .info-item div { display: flex; flex-direction: column; }
@@ -145,122 +192,423 @@ header .container { display: flex; justify-content: space-between; align-items: 
 
 /* MODULES SECTION */
 .modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-.module-card { background-color: var(--bg-light-dark); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); transition: transform 0.3s ease; }
+.module-card { 
+    /* Adiciona cursor: pointer para indicar clicável */
+    cursor: pointer; 
+    background-color: var(--card-bg); padding: 2rem; border-radius: 8px; 
+    border: 1px solid var(--border-color); transition: transform 0.3s ease, background-color 0.4s, border-color 0.4s;
+    color: var(--text-white);
+}
 .module-card:hover { transform: translateY(-5px); }
 .module-number { font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 1rem; display: block; }
-.module-card h3 { margin-bottom: 0.5rem; }
+.module-card h3 { margin-bottom: 0.5rem; color: var(--text-white); }
 .module-card p { color: var(--text-muted); }
-.project-card { background-color: var(--primary-blue); color: var(--bg-dark); }
+
+.project-card { background-color: var(--primary-blue); }
 .project-card h3, .project-card p, .project-card .module-number { color: var(--bg-dark); }
+body.light-mode .project-card h3, 
+body.light-mode .project-card p, 
+body.light-mode .project-card .module-number { 
+    color: var(--bg-light-dark); 
+}
 
-/* DEVELOPERS SECTION */
-.developers-container { display: flex; align-items: center; gap: 3rem; }
-.university-logo { width: 200px; height: auto; }
-.developers-bio .section-title { text-align: left; }
-.developers-bio p { color: var(--text-muted); margin-bottom: 1.5rem; }
-.cta-button-secondary { display: inline-block; padding: 0.8rem 2rem; border: 2px solid var(--primary-blue); color: var(--primary-blue); text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; }
-.cta-button-secondary:hover { background-color: var(--primary-blue); color: var(--bg-dark); }
 
-/* CURRICULUM SECTION (ACORDEÃO) */
-.curriculum-section { background-color: var(--bg-light-dark); }
-.accordion-container { max-width: 800px; margin: 0 auto; }
-.accordion-item { border-bottom: 1px solid var(--border-color); }
-.accordion-header {
-    width: 100%;
+/* SEÇÃO DE DESENVOLVEDORES INTEGRADA (Piso/Base) */
+.team-section-integrated {
+    background-color: var(--bg-light-dark); 
+    text-align: center;
+    transition: background-color 0.4s;
+    
+    /* EFEITO DE LINHAS CURVAS (Radial Gradientes AUMENTADOS E MAIS AZUIS) */
+    background-image: 
+        /* Círculo Azul Grande - Canto Superior Esquerdo (MAIOR E MAIS FORTE) */
+        radial-gradient(circle at 0% 0%, var(--bg-radial-color-dark-large) 0%, transparent 40%), 
+        /* Círculo Azul Menor - Canto Inferior Direito (MAIOR E MAIS FORTE) */
+        radial-gradient(circle at 100% 100%, var(--bg-radial-color-dark-small) 0%, transparent 45%); 
+    
+    background-size: 100% 100%;
+    background-position: center;
+
+    /* REGRAS DE INVERSÃO PARA O MODO CLARO */
+    body.light-mode & {
+        background-color: var(--team-bg-light); /* AZUL FORTE */
+        color: var(--team-text-light); /* BRANCO */
+        
+        /* Ajuste dos gradientes para serem BRANCOS/SUTIS no fundo azul */
+        background-image: 
+            radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 40%), 
+            radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 45%); 
+    }
+
+    /* REMOVEMOS AS PROPRIEDADES STICKY */
+    position: relative; /* Volta ao fluxo normal */
+    z-index: 1; /* Garante que ela esteja na camada de baixo */
+}
+
+/* Regras de cores internas para garantir a inversão */
+.team-section-integrated .team-subtitle,
+.team-section-integrated .team-toggle-button {
+    color: var(--primary-blue);
+}
+body.light-mode .team-section-integrated .team-subtitle,
+body.light-mode .team-section-integrated .team-toggle-button {
+    color: var(--team-text-light); /* BRANCO */
+    border-color: var(--team-border-light); /* BRANCO */
+}
+
+/* Título e Descrição (para garantir que sejam BRANCOS no tema azul/claro) */
+.team-section-integrated h2,
+.team-section-integrated .team-description,
+.team-section-integrated h3,
+.team-section-integrated .member-role-integrated {
+    color: var(--text-white); 
+}
+body.light-mode .team-section-integrated h2,
+body.light-mode .team-section-integrated .team-description,
+body.light-mode .team-section-integrated h3,
+body.light-mode .team-section-integrated .member-role-integrated {
+    color: var(--team-text-light); /* BRANCO */
+}
+/* Links e Ícones Sociais */
+.team-section-integrated .social-icon {
+    color: var(--text-muted);
+}
+body.light-mode .team-section-integrated .social-icon {
+    color: var(--team-muted-light); /* Branco sutil */
+}
+body.light-mode .team-section-integrated .social-icon:hover {
+    color: var(--team-text-light); /* Branco puro */
+}
+
+
+.team-header {
+    max-width: 800px;
+    margin: 0 auto 2rem auto; /* Reduz margem inferior para o botão */
+    padding: 0 1rem;
+}
+
+.team-subtitle {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--primary-blue);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.team-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.team-description {
+    font-size: 1.1rem;
+}
+
+/* Botão de Toggle da Equipe */
+.team-toggle-button {
     background: none;
     border: none;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    text-align: left;
-    color: var(--text-white);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    padding: 0.5rem 1rem;
+    margin: 1.5rem auto 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+.team-toggle-button:hover {
+    color: #0c8cd4;
+}
+body.light-mode .team-toggle-button:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#team-toggle-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+/* Estilo quando a lista está aberta */
+.team-grid-container.expanded #team-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Container da Grade da Equipe (ocultável) */
+.team-grid-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    margin-top: 2rem;
+}
+/* Estilo para quando a lista for expandida via JS */
+.team-grid-container.expanded {
+    max-height: 2000px; /* Valor alto para acomodar o conteúdo */
+}
+
+/* Grid da Equipe e Cards (estilos internos) */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.member-card-integrated {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex; /* Mantido flex para centralizar o conteúdo */
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Inversão do Card no Tema Claro/Azul */
+body.light-mode .member-card-integrated {
+    background-color: rgba(0, 0, 0, 0.1); /* Um preto muito transparente no fundo azul */
+    border-color: rgba(255, 255, 255, 0.4); /* Borda branca mais sutil */
+}
+
+.member-card-integrated:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
+}
+
+/* REMOVIDO: .member-photo-integrated */
+
+.member-card-integrated h3 {
+    font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem;
+}
+
+.member-role-integrated {
+    font-size: 0.9rem; margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    font-size: 1.5rem; transition: color 0.3s ease;
+}
+
+.social-icon:hover { color: var(--primary-blue); }
+
+/* CURRICULUM SECTION (ACORDEÃO - O Curso) - SEÇÃO QUE COBRE */
+.curriculum-section { 
+    background-color: var(--bg-light-dark); 
+    
+    /* Efeito de Cobertura */
+    position: relative; 
+    z-index: 2; /* Fica por cima de #team-section-integrated (z-index: 1) */
+    
+    /* Ajuste de Posição para Cobertura: Joga a seção para cima */
+    margin-top: -5rem; /* Puxa para cima para cobrir parte da seção anterior */
+    
+    /* Borda superior invisível/separadora (mantida do pedido anterior) */
+    border-top: 1px solid var(--border-color);
+    
+    /* Transição SUAVE REFORÇADA: Garante que a transição de cor e posição seja suave */
+    transition: background-color 0.6s ease, border-color 0.6s ease, margin-top 0.6s ease;
+    
+    /* Ajuste de padding-top para não cobrir o próprio título */
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+.accordion-container { max-width: 800px; margin: 0 auto; }
+.accordion-item { border-bottom: 1px solid var(--border-color); transition: border-color 0.4s; }
+.accordion-header {
+    width: 100%; background: none; border: none; padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+    text-align: left; color: var(--text-white); font-size: 1.2rem; font-weight: 600;
+    /* Aplicando a fonte Inter */
+    font-family: 'Inter', sans-serif; 
+    transition: color 0.4s;
 }
 .accordion-header i { font-size: 1.5rem; color: var(--primary-blue); transition: transform 0.3s ease; }
 .accordion-item.active .accordion-header i { transform: rotate(45deg); }
 .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    background-color: var(--bg-dark);
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+    background-color: var(--bg-accordion-active); 
 }
-.accordion-content p { padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.8; }
+.accordion-content p { 
+    padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.8; 
+    transition: color 0.4s;
+}
 
-/* SEÇÃO FINAL DE INSCRIÇÃO */
+/* Adicionado estilo para listas no acordeão */
+.accordion-content ul {
+    list-style: none;
+    padding: 0 1.5rem 1.5rem 2.5rem;
+    color: var(--text-muted);
+}
+.accordion-content li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+.accordion-content li::before {
+    content: '-';
+    color: var(--primary-blue);
+    position: absolute;
+    left: -1em;
+}
+
+/* NOVA SEÇÃO FAQ / DÚVIDAS */
+#faq-section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.faq-container {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.faq-header {
+    flex: 0 0 35%; /* Ocupa 35% da largura, fixa */
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.faq-header .faq-subtitle {
+    display: block;
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.faq-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.faq-accordion-container {
+    flex: 1; /* Ocupa o restante do espaço */
+    max-width: none;
+    margin: 0;
+}
+/* Os estilos .accordion-item e .accordion-header já cobrem a FAQ */
+
+
+/* SEÇÃO FINAL DE INSCRIÇÃO (Customizada) */
 #inscricao-final {
-    background: var(--bg-dark-blue-gradient);
+    background-color: var(--final-cta-bg);
     padding: 6rem 0;
     position: relative;
     overflow: hidden;
+    /* Garante que todo o texto desta seção seja branco (text-white) no modo escuro,
+       e FORÇA o branco no modo claro também, para manter o contraste no fundo preto. */
+    color: var(--text-white); 
+    font-family: 'Inter', sans-serif; 
 }
+/* FORÇA o branco para o texto no modo CLARO, para o bloco #inscricao-final */
+body.light-mode #inscricao-final {
+    color: #FFFFFF; 
+}
+
+
+/* Pseudo-elemento: Ícone HTML5 (ph-file-html-bold) */
 #inscricao-final::before {
-    content: '';
+    content: "\e08b"; /* Código Unicode para o ícone HTML (exemplo: ph-file-html-bold) */
+    font-family: 'Phosphor', sans-serif; /* Usando a família de ícones */
     position: absolute;
-    top: -100px;
-    left: -100px;
-    width: 300px;
-    height: 300px;
-    background-color: rgba(14, 165, 233, 0.1);
-    border-radius: 50%;
-    filter: blur(80px);
+    top: -20px;
+    left: 5%;
+    font-size: 20vw;
+    color: rgba(255, 255, 255, 0.03); /* Cor muito clara para ser discreto */
+    opacity: 0.5;
     z-index: 1;
+    transform: rotate(-10deg);
 }
+
+/* Pseudo-elemento: Ícone CSS3 (ph-file-css-bold) */
+#inscricao-final::after {
+    content: "\e089"; /* Código Unicode para o ícone CSS (exemplo: ph-file-css-bold) */
+    font-family: 'Phosphor', sans-serif; /* Usando a família de ícones */
+    position: absolute;
+    bottom: -50px;
+    right: 10%;
+    font-size: 15vw;
+    color: rgba(255, 255, 255, 0.05); /* Cor ligeiramente diferente */
+    opacity: 0.6;
+    z-index: 1;
+    transform: rotate(15deg);
+}
+
 .final-cta-container {
-    max-width: 1200px;
+    display: block;
+    max-width: 800px; /* Aumentado para melhor alinhamento com a esquerda */
     margin: 0 auto;
     padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
+    /* Alinhamento à esquerda, conforme solicitado */
+    text-align: left; 
     position: relative;
-    z-index: 2;
+    z-index: 2; 
 }
-.final-cta-content { flex: 1; max-width: 550px; }
+
+.final-cta-content { 
+    max-width: 100%; 
+}
+
 .final-cta-content h2 {
-    font-size: 2.8rem;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    font-weight: 700;
-    color: var(--text-white);
+    font-size: 2.8rem; line-height: 1.2; margin-bottom: 2rem; font-weight: 700;
+    /* O texto já está branco por causa da regra #inscricao-final acima */
 }
-.final-cta-features { list-style: none; margin-bottom: 2.5rem; padding-left: 0; }
-.final-cta-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1rem; }
+.final-cta-features { list-style: none; margin-bottom: 2.5rem; padding-left: 0; text-align: left; }
+.final-cta-features li { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; color: inherit; margin-bottom: 1rem; }
 .final-cta-features li i { color: var(--primary-blue); font-size: 1.5rem; }
+
 .cta-button-final {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.2rem 2.5rem;
-    background-color: var(--primary-blue);
-    color: var(--text-white);
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none;
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.75rem; padding: 1.2rem 2.5rem;
+    background-color: var(--primary-blue); 
+    /* Alterado para ser sempre branco */
+    color: #FFFFFF; 
+    font-size: 1.1rem; font-weight: 700; text-decoration: none; border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease; border: none; cursor: pointer;
 }
 .cta-button-final:hover { background-color: #0c8cd4; transform: translateY(-3px); }
-.cta-button-final i { font-size: 1.5rem; }
-.final-cta-image { flex: 1; display: flex; justify-content: center; align-items: center; max-width: 600px; }
-.final-cta-image img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); }
+
 
 /* FOOTER */
-footer { padding: 2rem 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border-color); }
+footer { 
+    padding: 2rem 0; text-align: center; color: var(--text-muted); 
+    border-top: 1px solid var(--border-color); 
+    transition: border-color 0.4s;
+}
 
 /* RESPONSIVIDADE */
 @media (max-width: 992px) {
-    .final-cta-container { flex-direction: column; text-align: center; }
-    .final-cta-content { max-width: 100%; }
+    /* Ajuste para mobile: centralizar o CTA final, mas manter os itens da lista à esquerda */
+    .final-cta-container { max-width: 100%; text-align: left; }
     .final-cta-content h2 { font-size: 2.5rem; }
-    .final-cta-features { text-align: left; }
-    .final-cta-image { margin-top: 3rem; }
+    .final-cta-features { text-align: left; } /* Mantém a lista à esquerda */
+    .final-cta-features li { justify-content: flex-start; } /* Alinha os itens da lista à esquerda */
+    .cta-button-final { margin: 0 auto; display: flex; justify-content: center; width: 100%; max-width: 300px; }
+    
+    /* FAQ Mobile Layout */
+    .faq-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .faq-header {
+        flex: 0 0 auto;
+        text-align: center;
+    }
+    .faq-header h2 {
+        text-align: center;
+    }
 }
 @media (max-width: 768px) {
     .section-padding { padding: 4rem 0; }
@@ -268,20 +616,18 @@ footer { padding: 2rem 0; text-align: center; color: var(--text-muted); border-t
     .hero-content h1 { font-size: 2.2rem; }
     #info-bar .container { flex-direction: column; gap: 1.5rem; }
     .modules-grid { grid-template-columns: 1fr; }
-    .developers-container { flex-direction: column; text-align: center; }
-    .developers-bio .section-title { text-align: center; }
     
-    /* Regras de Mobile para o Menu Off-Canvas */
-    #main-nav-desktop {
-        display: none; /* Esconder a navegação desktop */
-    }
-    .menu-toggle {
-        display: block; /* Mostrar o botão de hambúrguer */
-    }
+    /* Regras de Mobile para o Menu Off-Canvas e Header */
+    #main-nav-desktop { display: none; }
+    .menu-toggle { display: block; }
 
-    /* Ajuste de largura do menu lateral para mobile */
-    .offcanvas-menu {
-        width: 280px;
-        right: -280px;
+    .offcanvas-menu { width: 280px; right: -280px; }
+
+    /* Ajuste para a seção de Desenvolvedores no Mobile */
+    .team-header h2 { font-size: 2rem; }
+    
+    /* Ajuste de Margem Negativa para Mobile */
+    .curriculum-section {
+        margin-top: -3rem; 
     }
 }
